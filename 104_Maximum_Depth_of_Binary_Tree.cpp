@@ -37,3 +37,18 @@ public:
     
     
 };
+
+
+
+//more concise and quick
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if (root == NULL) return 0;
+        return 1+max(maxDepth(root->left),maxDepth(root->right));
+    }
+    int max(int a, int b){
+        return a >= b ? a : b;
+    }
+    
+};
