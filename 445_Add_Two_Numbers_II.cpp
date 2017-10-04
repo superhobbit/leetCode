@@ -77,3 +77,38 @@ ListNode* traverse(ListNode* root){
     }
     return pre->next;
 }
+
+
+
+Using stack to avoid traverse the list
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    stack<int>S1;
+    stack<int>S2;
+    ListNode* tmp = l1;
+    ListNode*tmp2 = l2;
+    while(tmp != NULL){
+        S1.push(tmp->val);
+        tmp = tmp->next;
+    }
+    while(tmp2 != NULL){
+        S2.push(tmp2->val);
+        tmp2 = tmp2->next;
+    }
+    ListNode* result = new ListNode(0);
+    while(!S1.empty() || !S2.empty()){
+        if (!S1.empty()) {
+            result->val += S1.top();
+            S1.pop();
+        }
+        if (!S2.empty()) {
+            result->val += S2.top();
+            S2.pop();
+        }
+        ListNode* forward = new ListNode((result->val)/10);
+        result->val = (result->val)%10;
+        forward->next = result;
+        result = forward;
+    }
+    if (result->val == 0) return result->next;
+    return result;
+}
