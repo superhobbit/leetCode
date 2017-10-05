@@ -50,3 +50,20 @@ void changeTree(queue<TreeLinkNode*> q){
       }
   }
 }
+
+
+
+A more neatly solution, I don't think it is much faster, but less space complexity.
+void connect(TreeLinkNode *root) {
+    if (root == NULL) return;
+    TreeLinkNode* head = root;
+    while(root->left){
+        head = root;
+        while(head){
+            head->left->next = head->right;
+            if (head->next) head->right->next = head->next->left;
+            head = head->next;
+        }
+        root = root->left;
+    }
+}
