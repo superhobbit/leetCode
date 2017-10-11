@@ -23,3 +23,23 @@ int lengthOfLongestSubstring(string s) {
     }
     return maxI;
 }
+
+
+More efficient way:
+int lengthOfLongestSubstring(string s) {
+    if (s.length() == 0) return 0;
+    int next = 0, maxV = 0;
+    bool exist[256] = {false};
+    for (int i = 0; i < s.size(); ++i){
+        if(!exist[s[i]]){
+            maxV = max(maxV,i-next+1);
+            exist[s[i]] = true;
+        }else{
+            while(exist[s[i]]){
+                exist[s[next++]] = false;
+            }
+            exist[s[i]] = true;
+        }
+    }
+    return maxV;
+}
