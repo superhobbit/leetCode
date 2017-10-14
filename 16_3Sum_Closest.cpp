@@ -78,3 +78,26 @@ int threeSumClosest(vector<int>& nums, int target) {
     }
     return 0;
 }
+
+
+A more elegent solution:
+int threeSumClosest(vector<int>& nums, int target) {
+    int minV = INT_MAX;
+    int sum;
+    int res;
+    std::sort(nums.begin(),nums.end());
+    if (nums.size() < 3) return accumulate(nums.begin(),nums.end(),0);
+    for (int i = 0; i < nums.size()-2; ++i){
+        int low = i+1;
+        int high = nums.size()-1;
+        while(low < high){
+            sum = nums[i]+nums[low]+nums[high];
+            if (sum == target) return sum;
+            if (sum < target) low++;
+            else high--;
+            minV = min(minV,abs(sum-target));
+            if (abs(sum-target) <= minV) res = sum;
+        }
+    }
+    return res;
+}
