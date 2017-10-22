@@ -27,3 +27,23 @@ DP solution:
     
     
 General solution: use single element as center, and find odd and even results seperetly:
+class Solution {
+public:
+    int count;
+    int countSubstrings(string s) {
+        if (s.size() == 0) return 0;
+        count = 0;
+        for (int i = 0; i < s.size(); ++i){
+            helper(s,i,i);
+            helper(s,i,i+1);
+        }
+        return count;
+    }
+    void helper(string s, int left, int right){
+        while(left >= 0 && right < s.size() && s.at(left) == s.at(right)){
+            count++;
+            left--;
+            right++;
+        }
+    }
+};
